@@ -12,7 +12,7 @@
     name: 'app',
     components: {
       Ads
-    }
+    },
   };
 </script>
 
@@ -20,25 +20,8 @@
   @import url('https://fonts.googleapis.com/css?family=Roboto');
   @import './sass/variables';
 
-  * {
-    box-sizing: border-box;
-  }
-
   body {
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    line-height: 1.15;
-    margin: 0;
-    color: $primary-text-color;
-  }
-
-  a {
-    color: $brand-color;
-    text-decoration: none;
-
-    &:hover {
-      opacity: .7;
-    }
   }
 
   .slider {

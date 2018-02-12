@@ -2,7 +2,7 @@
   <section class="section">
     <uploader @uploaded="handleUpload"></uploader>
     <div class="ads__stats">
-      <price-chart class="ads__stats--chart" :chartData="chartData"></price-chart>
+      <scatter-chart class="ads__stats--chart" :chart-data="chartData"></scatter-chart>
       <div>
         <div>Min {{ minPrice }}&euro;</div>
         <div>Max {{ maxPrice }}&euro;</div>
@@ -49,16 +49,12 @@
 
 <script>
   import Uploader from './Uploader';
-  import PriceChart from './PriceChart';
+  import ScatterChart from './ScatterChart';
   import Ad from './Ad';
 
   export default {
     name: 'ads',
-    components: {
-      Uploader,
-      Ad,
-      PriceChart,
-    },
+    components: {Uploader, Ad, ScatterChart},
     data() {
       return {
         items: [],
@@ -139,9 +135,17 @@
         return (this.prices.reduce((sum, price) => sum + price, 0) / this.prices.length).toFixed(2);
       },
       chartData() {
-        return this.filteredList.map(item => {
-          return {x: Number(item.year), y: item.price};
-        });
+        return {
+          datasets: [
+            {
+              label: 'Price to Year',
+              backgroundColor: '#1976d2',
+              data: this.filteredList.map(item => {
+                return {x: Number(item.year), y: item.price};
+              }),
+            }
+          ],
+        };
       },
     },
     methods: {
