@@ -1,10 +1,8 @@
 {
   "processors": ["stylelint-processor-html"],
   "extends": "stylelint-config-standard",
-  "plugins": [
-    "stylelint-selector-bem-pattern"
-  ],
   "rules": {
-    "number-leading-zero": "never"
+    "number-leading-zero": "never",
+    "no-empty-source": null
   }
 }

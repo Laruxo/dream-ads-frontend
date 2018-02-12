@@ -50,8 +50,7 @@
       "tags tags tags"
       "location date date"
       "pictures pictures pictures"
-      "info info remove"
-    ;
+      "info info remove";
     grid-row-gap: $base-margin/2;
     overflow: hidden;
 

@@ -29,6 +29,10 @@
       bottom: 0;
     }
 
+    .slider-icon {
+      border-color: $brand-color;
+    }
+
     .btn {
       background: none;
 
@@ -37,10 +41,6 @@
           border-color: lighten($brand-color, 10%);
         }
       }
-    }
-
-    .slider-icon {
-      border-color: $brand-color;
     }
   }
 </style>

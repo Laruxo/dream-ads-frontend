@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 const {resolve} = require('path');
 const webpack = require('webpack');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
@@ -7,13 +9,13 @@ module.exports = {
   output: {
     path: resolve(__dirname, './public'),
     publicPath: '/',
-    filename: 'app.js'
+    filename: 'app.js',
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
-    }
+      'vue$': 'vue/dist/vue.esm.js',
+    },
   },
   module: {
     rules: [
@@ -30,14 +32,18 @@ module.exports = {
           loaders: {
             'scss': 'vue-style-loader!css-loader!postcss-loader!sass-loader',
           },
-        }
+        },
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
-      }
-    ]
+        include: [
+          resolve('src'),
+          resolve('test'),
+          resolve('node_modules/webpack-dev-server/client'),
+        ],
+      },
+    ],
   },
   plugins: [
     new FriendlyErrorsWebpackPlugin(),
@@ -52,5 +58,5 @@ module.exports = {
     overlay: true,
     contentBase: resolve('public'),
   },
-  devtool: '#cheap-module-eval-source-map'
+  devtool: '#cheap-module-eval-source-map',
 };

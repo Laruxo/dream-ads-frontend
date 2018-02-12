@@ -7,8 +7,8 @@
     "dev": "webpack-dev-server --progress",
     "build": "webpack --progress",
     "lint": "npm run lint:css && npm run lint:js",
-    "lint:css": "stylelint src/sass/*.scss src/**/*.vue --syntax scss",
-    "lint:js": "eslint --ext .js,.vue src",
+    "lint:css": "stylelint 'src/sass/*.scss' 'src/**/*.vue' --syntax scss",
+    "lint:js": "eslint .",
     "test": "mocha tests"
   },
   "author": "Laurynas Baltrenas",
