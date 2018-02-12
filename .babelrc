@@ -1,0 +1,13 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false,
+        "targets": {"browsers": ["> 4%"]}
+      }
+    ],
+    "stage-2"
+  ],
+  "plugins": ["transform-runtime"],
+}
