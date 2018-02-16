@@ -58,5 +58,5 @@ module.exports = {
     overlay: true,
     contentBase: resolve('public'),
   },
-  devtool: '#cheap-module-eval-source-map',
+  devtool: '#source-map',
 };

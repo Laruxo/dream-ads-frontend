@@ -27,13 +27,13 @@
       <div class="select">
         <select v-model="yearFrom">
           <option disabled value="">Year From</option>
-          <option v-for="year in years" :value="year">{{ year }}</option>
+          <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
         </select>
       </div>
       <div class="select">
         <select v-model="yearTo">
           <option disabled value="">Year To</option>
-          <option v-for="year in years" :value="year">{{ year }}</option>
+          <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
         </select>
       </div>
       <button class="button" :class="{ 'is-primary': withMileage }"

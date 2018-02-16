@@ -1,4 +1,5 @@
 {
+  "plugins": ["transform-runtime"],
   "presets": [
     [
       "env",
@@ -9,5 +10,11 @@
     ],
     "stage-2"
   ],
-  "plugins": ["transform-runtime"],
+  "env": {
+    "test": {
+      "presets": [
+        ["env", {"targets": {"node": "current"}}]
+      ]
+    }
+  }
 }

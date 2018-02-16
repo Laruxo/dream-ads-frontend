@@ -19,19 +19,29 @@
           this.parseFileContents(file);
         }
       },
-      parseFileContents(file) {
-        const reader = new FileReader();
-        reader.onload = event => {
-          try {
-            const result = JSON.parse(event.target.result);
-            this.$emit('uploaded', result);
-          } catch (exception) {
-            console.error('Bad file provided.');
-          }
-        };
-        reader.readAsText(file);
+      async parseFileContents(file) {
+        try {
+          const content = await this.readFile(file);
+          this.$emit('uploaded', JSON.parse(content));
+        } catch (e) {
+          console.error(e.message);
+        }
       },
-    }
+      readFile(file) {
+        const reader = new FileReader();
+
+        return new Promise((resolve, reject) => {
+          reader.onerror = () => {
+            reader.abort();
+            reject(new DOMException('Problem parsing input file.'));
+          };
+          reader.onload = () => {
+            resolve(reader.result);
+          };
+          reader.readAsText(file);
+        });
+      },
+    },
   };
 </script>
 
