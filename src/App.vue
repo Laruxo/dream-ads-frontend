@@ -1,6 +1,10 @@
 <template>
-  <main id="app" class="section">
-    <h1 class="title is-1 has-text-centered">Dream Ads</h1>
+  <main id="app">
+    <header class="navbar is-dark has-shadow" id="top">
+      <div class="navbar-brand">
+        <h1 class="navbar-item">Dream Ads</h1>
+      </div>
+    </header>
     <ads></ads>
   </main>
 </template>
