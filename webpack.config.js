@@ -56,6 +56,7 @@ module.exports = {
     hot: true,
     noInfo: true,
     overlay: true,
+    historyApiFallback: true,
     contentBase: resolve('public'),
   },
   devtool: '#source-map',

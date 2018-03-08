@@ -1,30 +1,42 @@
 <template>
-  <div class="uploader file is-boxed is-centered is-large">
-    <label class="file-label" for="ads-json">
-      <input class="file-input" id="ads-json" type="file" @change="handleFile">
-      <span class="file-cta">
-        <span class="file-icon"><span class="fa fa-upload"></span></span>
-        <span class="file-label">Chose your ads json file...</span>
-      </span>
-    </label>
-  </div>
+  <section class="section">
+    <div class="uploader file is-boxed is-centered is-large">
+      <label class="file-label" for="ads-json">
+        <input class="file-input" id="ads-json" type="file" @change="handleFile($event.target.files[0])">
+        <span class="file-cta">
+          <span class="file-icon"><span class="fa fa-upload"></span></span>
+          <span class="file-label">Chose your ads json file...</span>
+          <span class="file-label" v-if="status">{{ status }}</span>
+        </span>
+      </label>
+    </div>
+    <ul v-if="logs">
+      <li v-for="log in logs">
+        {{ log }}
+      </li>
+    </ul>
+  </section>
 </template>
 
 <script>
   export default {
     name: 'uploader',
+    data() {
+      return {
+        status: '',
+        logs: [],
+      };
+    },
     methods: {
-      handleFile(e) {
-        for (let file of e.target.files) {
-          this.parseFileContents(file);
-        }
-      },
-      async parseFileContents(file) {
+      async handleFile(file) {
+        this.status = 'Loading';
         try {
           const content = await this.readFile(file);
-          this.$emit('uploaded', JSON.parse(content));
+          await this.handleItems(JSON.parse(content));
+          this.status = 'Success';
         } catch (e) {
           console.error(e.message);
+          this.status = 'Error';
         }
       },
       readFile(file) {
@@ -41,6 +53,12 @@
           reader.readAsText(file);
         });
       },
+      async handleItems(items) {
+        for (const item of items) {
+          const result = await this.$store.dispatch('addAd', item);
+          this.logs.push(result);
+        }
+      }
     },
   };
 </script>

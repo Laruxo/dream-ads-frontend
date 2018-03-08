@@ -4,8 +4,14 @@
       <div class="navbar-brand">
         <h1 class="navbar-item">Dream Ads</h1>
       </div>
+      <div class="navbar-menu">
+        <div class="navbar-end">
+          <router-link class="navbar-item" :to="{name:'home'}">Home</router-link>
+          <router-link class="navbar-item" :to="{name:'upload'}">Upload</router-link>
+        </div>
+      </div>
     </header>
-    <ads></ads>
+    <router-view/>
   </main>
 </template>
 
@@ -23,28 +29,5 @@
 <style lang="scss">
   @import url('https://fonts.googleapis.com/css?family=Roboto');
   @import './sass/variables';
-
-  body {
-    font-family: 'Roboto', sans-serif;
-  }
-
-  .slider {
-    .indicators {
-      bottom: 0;
-    }
-
-    .slider-icon {
-      border-color: $brand-color;
-    }
-
-    .btn {
-      background: none;
-
-      &:hover {
-        .slider-icon {
-          border-color: lighten($brand-color, 10%);
-        }
-      }
-    }
-  }
+  @import "~bulma";
 </style>

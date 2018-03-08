@@ -1,15 +1,23 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Uploader from '../components/Uploader.vue';
+import Ads from '../components/Ads';
+import Uploader from '../components/Uploader';
 
 Vue.use(Router);
 
 export default new Router({
+  linkActiveClass: 'active',
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'Uploader',
+      name: 'home',
+      component: Ads,
+    },
+    {
+      path: '/upload',
+      name: 'upload',
       component: Uploader,
     },
   ],
