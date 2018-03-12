@@ -16,18 +16,17 @@
 </template>
 
 <script>
-  import Ads from './components/Ads.vue';
+import Ads from './components/Ads.vue';
 
-  export default {
-    name: 'app',
-    components: {
-      Ads
-    },
-  };
+export default {
+  components: {
+    Ads,
+  },
+};
 </script>
 
 <style lang="scss">
-  @import url('https://fonts.googleapis.com/css?family=Roboto');
+  @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin-ext');
   @import './sass/variables';
   @import "~bulma";
 </style>

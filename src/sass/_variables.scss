@@ -1,10 +1,6 @@
-@import "~bulma/sass/utilities/initial-variables";
 $primary: #1976d2;
 $primary-invert: #fff;
 $danger: #d32f2f;
 $family-primary: 'Roboto', sans-serif;
 
-$primary-text-color: rgba(0, 0, 0, .9);
-$brand-text-color: #fff;
-$shadow-color: rgba(0, 0, 0, .5);
-$active-color: rgba(0, 0, 0, .1);
+@import "~bulma/sass/utilities/_all";

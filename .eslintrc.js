@@ -14,8 +14,12 @@ module.exports = {
     ecmaVersion: 2017,
     sourceType: "module",
   },
-  plugins: ['html', 'vue'],
+  plugins: ['vue'],
   rules: {
+    // Vue
+    'vue/html-self-closing': ['error', {html: {void: 'always'}}],
+    'vue/max-attributes-per-line': 'off',
+    // Base
     "accessor-pairs": "off",
     "array-bracket-newline": "off",
     "array-bracket-spacing": "error", // custom
