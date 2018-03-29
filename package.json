@@ -16,6 +16,7 @@
   "dependencies": {
     "bulma": "^0.6.2",
     "chart.js": "^2.7.1",
+    "dexie": "^2.0.2",
     "stylelint": "^8.4.0",
     "stylelint-config-standard": "^18.0.0",
     "stylelint-processor-html": "^1.0.0",

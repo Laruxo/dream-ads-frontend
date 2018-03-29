@@ -22,6 +22,10 @@ export default {
   components: {
     Ads,
   },
+  created() {
+    this.$store.dispatch('initDb');
+    this.$store.dispatch('filterAds');
+  },
 };
 </script>
 

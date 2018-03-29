@@ -11,9 +11,7 @@
         </span>
       </label>
     </div>
-    <ul v-if="logs">
-      <li v-for="(index, log) in logs" :key="index">{{ log }}</li>
-    </ul>
+    <div v-if="done > 0">Done: {{ done }}</div>
   </section>
 </template>
 
@@ -22,11 +20,12 @@ export default {
   data() {
     return {
       status: '',
-      logs: [],
+      done: 0,
     };
   },
   methods: {
     async handleFile(file) {
+      this.done = 0;
       this.status = 'Loading';
       try {
         const content = await this.readFile(file);
@@ -52,9 +51,9 @@ export default {
       });
     },
     async handleItems(items) {
-      for (const item of items) {
-        const result = await this.$store.dispatch('addAd', item);
-        this.logs.push(result);
+      for (const item of Object.values(items.ads)) {
+        await this.$store.dispatch('addAd', item);
+        this.done++;
       }
     },
   },

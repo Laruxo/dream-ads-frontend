@@ -1,7 +1,7 @@
 <template>
   <li class="ad">
-    <div class="ad__pictures" v-if="item.pictures">
-      <img v-lazy="item.pictures[0]"/>
+    <div class="ad__pictures" v-if="item.images">
+      <img v-lazy="item.images"/>
     </div>
     <!--<swiper class="ad__pictures" v-if="item.pictures.length" :options="swiperOptions">-->
     <!--<swiper-slide v-for="(img, i) in item.pictures" :key="i">-->
@@ -15,12 +15,12 @@
     <div class="ad__overlay ad__overlay--bottom"/>
 
     <h4 class="ad__title is-size-4">
-      <a class="ad__remove is-size-1 has-text-danger" @click="$emit('remove')">&times;</a>
+      <a class="ad__ignore is-size-1 has-text-danger" @click="$emit('ignore')">&times;</a>
       <a :href="item.link" target="_blank">{{ item.title }}</a>
     </h4>
     <h3 class="ad__price is-size-3">{{ item.price }} &euro;</h3>
     <span class="ad__location" v-if="item.location">{{ item.location }}</span>
-    <span class="ad__date" v-if="item.date">{{ item.date }}</span>
+    <span class="ad__date" v-if="item.created_at">{{ item.created_at }}</span>
     <div class="ad__tags tags is-marginless">
       <span class="ad__tags-item tag is-primary" v-if="item.year">{{ item.year }}</span>
       <span class="ad__tags-item tag is-primary" v-if="item.power">{{ item.power }} kW</span>
@@ -151,7 +151,7 @@ export default {
       }
     }
 
-    &__remove {
+    &__ignore {
       padding-right: 25px;
       line-height: 1;
     }

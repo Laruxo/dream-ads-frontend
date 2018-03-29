@@ -41,8 +41,8 @@ export default {
           };
         }
         data[item.model].items.push(item);
-        data[item.model].priceOverYears.push({x: Number(item.year), y: item.price});
-        data[item.model].mileageOverYears.push({x: Number(item.year), y: item.mileage});
+        data[item.model].priceOverYears.push({x: item.year, y: item.price});
+        data[item.model].mileageOverYears.push({x: item.year, y: item.mileage});
       }
 
       return data;

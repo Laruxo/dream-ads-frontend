@@ -1,7 +1,7 @@
 <template>
   <section class="section">
-    <stats :data="filteredAds"/>
-    <filters :data="$store.state.ads" @filter-change="filter"/>
+    <stats :data="$store.state.filteredAds"/>
+    <filters/>
     <section class="ads__sorting">
       <div class="buttons has-addons">
         <button class="button is-white is-static">Sort By</button>
@@ -14,19 +14,26 @@
         <button class="button is-primary" @click="sortBy('mileage')">
           Mileage {{ sortedBy === 'mileage' ? (isAscending ? '&darr;' : '&uarr;') : '' }}
         </button>
-        <button class="button is-primary" @click="sortBy('date')">
-          Updated {{ sortedBy === 'date' ? (isAscending ? '&darr;' : '&uarr;') : '' }}
+        <button class="button is-primary" @click="sortBy('created_at')">
+          Created {{ sortedBy === 'created_at' ? (isAscending ? '&darr;' : '&uarr;') : '' }}
         </button>
       </div>
     </section>
     <section>
+      <a class="button is-primary" download="ads.json" :href="$store.state.downloadUrl"
+         v-if="$store.state.downloadUrl">
+        Download
+      </a>
+      <button class="button is-primary" @click="$store.dispatch('saveAds')" v-else>
+        Export
+      </button>
       <button class="button is-danger" @click="$store.dispatch('removeAllAds')">
         Remove All
       </button>
     </section>
     <transition-group name="ad" tag="ul" class="ads">
       <li is="ad" v-for="item in sortedList" :key="item.id"
-          :item="item" @remove="$store.dispatch('removeAd', item.id)"/>
+          :item="item" @ignore="$store.dispatch('ignoreAd', item.id)"/>
     </transition-group>
   </section>
 </template>
@@ -36,7 +43,6 @@ import Uploader from './Uploader';
 import Ad from './Ad';
 import Stats from './Stats';
 import Filters from './Filters';
-import {mapGetters} from 'vuex';
 
 export default {
   components: {
@@ -52,12 +58,9 @@ export default {
     };
   },
   computed: {
-    ...mapGetters([
-      'filteredAds',
-    ]),
     sortedList() {
       const order = this.isAscending ? -1 : 1;
-      return this.filteredAds.slice(0).sort((a, b) => {
+      return this.$store.state.filteredAds.slice(0).sort((a, b) => {
         if (a[this.sortedBy] < b[this.sortedBy]) {
           return order;
         }
@@ -71,9 +74,6 @@ export default {
     },
   },
   methods: {
-    filter(data) {
-      this.$store.dispatch('setFilters', data);
-    },
     sortBy(field) {
       this.sortedBy = field;
       this.isAscending = !this.isAscending;

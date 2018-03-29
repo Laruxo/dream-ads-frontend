@@ -3,6 +3,7 @@
     <thead>
       <tr>
         <th>Model</th>
+        <th>Count</th>
         <th>Available Starting</th>
         <th>Available Until</th>
         <th>Min Price</th>
@@ -13,6 +14,7 @@
     <tbody>
       <tr v-for="(stat, model) in stats" :key="model">
         <td>{{ model }}</td>
+        <td>{{ stat.count }}</td>
         <td>{{ stat.minYear }}</td>
         <td>{{ stat.maxYear }}</td>
         <td>{{ stat.min | money }}&euro;</td>
@@ -37,6 +39,7 @@ export default {
   },
   computed: {
     stats() {
+      let count = 0;
       let sum = 0;
       let min = Infinity;
       let max = 0;
@@ -46,14 +49,18 @@ export default {
       const stats = {};
       for (const group in this.data) {
         if (this.data.hasOwnProperty(group)) {
+          const groupSum = this.sum(this.data[group].items, 'price');
+          const groupCount = this.data[group].items.length;
           stats[group] = {
-            average: this.average(this.data[group].items, 'price'),
+            count: groupCount,
+            average: groupSum / groupCount,
             min: this.min(this.data[group].items, 'price'),
             max: this.max(this.data[group].items, 'price'),
             minYear: this.min(this.data[group].items, 'year'),
             maxYear: this.max(this.data[group].items, 'year'),
           };
-          sum += stats[group].average;
+          count += groupCount;
+          sum += groupSum;
           min = Math.min(min, stats[group].min);
           max = Math.max(max, stats[group].max);
           minYear = Math.min(minYear, stats[group].minYear);
@@ -62,7 +69,8 @@ export default {
       }
 
       stats['All'] = {
-        average: sum / Object.keys(stats).length,
+        count: count,
+        average: sum / count,
         min: min,
         max: max,
         minYear: minYear,
@@ -87,9 +95,8 @@ export default {
         return value > max ? value : max;
       }, -Infinity);
     },
-    average(items, field) {
-      const sum = items.reduce((sum, item) => sum + (field ? item[field] : item), 0);
-      return sum / items.length;
+    sum(items, field) {
+      return items.reduce((sum, item) => sum + (field ? item[field] : item), 0);
     },
   },
 };

@@ -10,6 +10,13 @@ export default {
       options: {
         maintainAspectRatio: false,
         responsive: true,
+        scales: {
+          xAxes: [{
+            ticks: {
+              stepSize: 1,
+            },
+          }],
+        },
       },
     };
   },
