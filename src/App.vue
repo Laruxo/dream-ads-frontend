@@ -7,7 +7,6 @@
       <div class="navbar-menu">
         <div class="navbar-end">
           <router-link class="navbar-item" :to="{name:'home'}">Home</router-link>
-          <router-link class="navbar-item" :to="{name:'upload'}">Upload</router-link>
         </div>
       </div>
     </header>
@@ -23,8 +22,7 @@ export default {
     Ads,
   },
   created() {
-    this.$store.dispatch('initDb');
-    this.$store.dispatch('filterAds');
+    this.$store.dispatch('init');
   },
 };
 </script>

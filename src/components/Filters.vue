@@ -5,7 +5,9 @@
         <div class="select">
           <select v-model="yearFrom">
             <option value="">Year From</option>
-            <option v-for="year in $store.state.years" :key="year" :value="year">{{ year }}</option>
+            <option v-for="year in $store.getters.years" :key="year" :value="year">
+              {{ year }}
+            </option>
           </select>
         </div>
       </div>
@@ -13,7 +15,9 @@
         <div class="select">
           <select v-model="yearTo">
             <option value="">Year To</option>
-            <option v-for="year in $store.state.years" :key="year" :value="year">{{ year }}</option>
+            <option v-for="year in $store.getters.years" :key="year" :value="year">
+              {{ year }}
+            </option>
           </select>
         </div>
       </div>
@@ -28,7 +32,7 @@
       </div>
     </div>
     <div class="field is-grouped is-grouped-multiline">
-      <p class="control" v-for="model in $store.state.models" :key="model">
+      <p class="control" v-for="model in $store.getters.models" :key="model">
         <button class="button" :class="{'is-primary': models.indexOf(model) !== -1}"
                 @click="toggleModel(model)">
           {{ model }}
@@ -36,7 +40,7 @@
       </p>
     </div>
     <div class="field is-grouped is-grouped-multiline">
-      <p class="control" v-for="source in $store.state.sources" :key="source">
+      <p class="control" v-for="source in $store.getters.sources" :key="source">
         <button class="button" :class="{'is-primary': sources.indexOf(source) !== -1}"
                 @click="toggleSource(source)">
           {{ source }}

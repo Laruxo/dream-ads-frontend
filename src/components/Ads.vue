@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <stats :data="$store.state.filteredAds"/>
+    <stats :data="$store.getters.filteredAds"/>
     <filters/>
     <section class="ads__sorting">
       <div class="buttons has-addons">
@@ -20,12 +20,11 @@
       </div>
     </section>
     <section>
-      <a class="button is-primary" download="ads.json" :href="$store.state.downloadUrl"
-         v-if="$store.state.downloadUrl">
-        Download
-      </a>
-      <button class="button is-primary" @click="$store.dispatch('saveAds')" v-else>
-        Export
+      <button class="button is-primary" @click="fetchAds" v-if="!loading">
+        Fetch New Ads
+      </button>
+      <button class="button is-primary" disabled v-else>
+        Fetching...
       </button>
       <button class="button is-danger" @click="$store.dispatch('removeAllAds')">
         Remove All
@@ -39,7 +38,6 @@
 </template>
 
 <script>
-import Uploader from './Uploader';
 import Ad from './Ad';
 import Stats from './Stats';
 import Filters from './Filters';
@@ -48,19 +46,19 @@ export default {
   components: {
     Filters,
     Stats,
-    Uploader,
     Ad,
   },
   data() {
     return {
       isAscending: true,
       sortedBy: 'price',
+      loading: false,
     };
   },
   computed: {
     sortedList() {
       const order = this.isAscending ? -1 : 1;
-      return this.$store.state.filteredAds.slice(0).sort((a, b) => {
+      return this.$store.getters.filteredAds.slice(0).sort((a, b) => {
         if (a[this.sortedBy] < b[this.sortedBy]) {
           return order;
         }
@@ -77,6 +75,15 @@ export default {
     sortBy(field) {
       this.sortedBy = field;
       this.isAscending = !this.isAscending;
+    },
+    async fetchAds() {
+      try {
+        this.loading = true;
+        await this.$store.dispatch('updateAds');
+      } catch (e) {
+        console.error(e);
+      }
+      this.loading = false;
     },
   },
 };
