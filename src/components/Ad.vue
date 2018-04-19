@@ -1,5 +1,5 @@
 <template>
-  <li class="ad">
+  <li class="ad box">
     <div class="ad__pictures" v-if="images">
       <img v-lazy="images[currentImage]"/>
     </div>
@@ -88,6 +88,8 @@ export default {
     transition-timing-function: ease-in;
     position: relative;
     color: $text-invert;
+    z-index: 10;
+    margin: 0;
 
     span {
       font-weight: 700;

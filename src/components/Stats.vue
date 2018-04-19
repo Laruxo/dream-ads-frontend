@@ -1,17 +1,34 @@
 <template>
-  <div>
-    <section class="charts">
-      <div>
-        <h4 class="title is-4 is-marginless">Price Over Years</h4>
-        <scatter-chart :chart-data="chartData.price" :height="300"/>
+  <section>
+    <div class="charts tile is-ancestor">
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+          <p class="title has-text-dark">Price Over Years</p>
+          <div class="content">
+            <scatter-chart :chart-data="chartData.price" :height="300"/>
+          </div>
+        </article>
       </div>
-      <div>
-        <h4 class="title is-4 is-marginless">Mileage Over Years</h4>
-        <scatter-chart :chart-data="chartData.mileage" :height="300"/>
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+          <p class="title has-text-dark">Mileage Over Years</p>
+          <div class="content">
+            <scatter-chart :chart-data="chartData.mileage" :height="300"/>
+          </div>
+        </article>
       </div>
-    </section>
-    <models-table :data="groupedData" :list="data"/>
-  </div>
+    </div>
+
+    <div class="tile is-ancestor">
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+          <div class="content">
+            <models-table :data="groupedData" :list="data"/>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -79,14 +96,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-  @import '../sass/variables';
-
-  .charts {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: $gap/2;
-    margin-bottom: $gap/2;
-  }
-</style>

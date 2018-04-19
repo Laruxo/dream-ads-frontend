@@ -77,7 +77,7 @@ module.exports = {
     "lines-around-directive": "off",
     "lines-between-class-members": "off",
     "max-depth": "off",
-    "max-len": ["warn", {code: 100, ignoreComments: true, ignoreUrls: true}], // custom
+    "max-len": ["warn", {code: 120, ignoreComments: true, ignoreUrls: true}], // custom
     "max-lines": "off",
     "max-nested-callbacks": "off",
     "max-params": ["warn", 3], // custom

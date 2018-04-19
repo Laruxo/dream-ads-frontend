@@ -1,17 +1,7 @@
 <template>
-  <main id="app">
-    <header class="navbar is-dark has-shadow" id="top">
-      <div class="navbar-brand">
-        <h1 class="navbar-item">Dream Ads</h1>
-      </div>
-      <div class="navbar-menu">
-        <div class="navbar-end">
-          <router-link class="navbar-item" :to="{name:'home'}">Home</router-link>
-        </div>
-      </div>
-    </header>
-    <router-view/>
-  </main>
+  <div id="app">
+    <ads/>
+  </div>
 </template>
 
 <script>

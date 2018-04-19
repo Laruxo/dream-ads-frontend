@@ -1,8 +1,8 @@
 <template>
   <section class="ads__filters">
-    <div class="field is-grouped">
-      <div class="control">
-        <div class="select">
+    <div class="tile is-ancestor">
+      <div class="tile is-parent">
+        <div class="select is-fullwidth">
           <select v-model="yearFrom">
             <option value="">Year From</option>
             <option v-for="year in $store.getters.years" :key="year" :value="year">
@@ -11,8 +11,8 @@
           </select>
         </div>
       </div>
-      <div class="control">
-        <div class="select">
+      <div class="tile is-parent">
+        <div class="select is-fullwidth">
           <select v-model="yearTo">
             <option value="">Year To</option>
             <option v-for="year in $store.getters.years" :key="year" :value="year">
@@ -21,31 +21,30 @@
           </select>
         </div>
       </div>
-      <div class="control">
-        <button class="button" :class="{'is-primary': withMileage}"
+      <div class="tile is-parent">
+        <button class="button is-fullwidth" :class="{'is-success': withMileage}"
                 @click="withMileage = !withMileage">
-          Only with mileage
+          Only With Mileage
         </button>
       </div>
-      <div class="control">
-        <input type="text" class="input" placeholder="Location" v-model.lazy="location"/>
+      <div class="tile is-parent">
+        <input type="text" class="input is-fullwidth" placeholder="Location" v-model.lazy="location"/>
       </div>
     </div>
-    <div class="field is-grouped is-grouped-multiline">
-      <p class="control" v-for="model in $store.getters.models" :key="model">
-        <button class="button" :class="{'is-primary': models.indexOf(model) !== -1}"
+
+    <div class="tile is-ancestor">
+      <div class="tile is-parent" v-for="model in $store.getters.models" :key="model">
+        <button class="button is-fullwidth" :class="{'is-success': models.indexOf(model) !== -1}"
                 @click="toggleModel(model)">
           {{ model }}
         </button>
-      </p>
-    </div>
-    <div class="field is-grouped is-grouped-multiline">
-      <p class="control" v-for="source in $store.getters.sources" :key="source">
-        <button class="button" :class="{'is-primary': sources.indexOf(source) !== -1}"
+      </div>
+      <div class="tile is-parent" v-for="source in $store.getters.sources" :key="source">
+        <button class="button is-fullwidth" :class="{'is-success': sources.indexOf(source) !== -1}"
                 @click="toggleSource(source)">
           {{ source }}
         </button>
-      </p>
+      </div>
     </div>
   </section>
 </template>

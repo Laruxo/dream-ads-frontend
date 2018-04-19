@@ -64,7 +64,7 @@ const store = new Vuex.Store({
     years(state) {
       return Array.from(
         new Set(state.ads.map(item => item.year)),
-      );
+      ).sort();
     },
     models(state) {
       return Array.from(
