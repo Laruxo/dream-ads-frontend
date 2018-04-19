@@ -7,7 +7,7 @@ Used as submodule in [dream-ads](https://github.com/Laruxo/dream-ads.git)
 ### Try it out
 ```
 $ npm i
-$ npm run start
+$ npm start
 ```
 
 Open `127.0.0.1:8080` in your browser.

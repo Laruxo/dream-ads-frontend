@@ -4,7 +4,6 @@
   "description": "App for parsing scraped ads .csv files to human readable format.",
   "main": "public/index.html",
   "scripts": {
-    "prestart": "npm install",
     "start": "npm run dev",
     "dev": "webpack-dev-server --progress",
     "build": "webpack --progress",
