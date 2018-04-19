@@ -1,16 +1,16 @@
 <template>
   <li class="ad">
-    <div class="ad__pictures" v-if="item.images">
-      <img v-lazy="item.images"/>
+    <div class="ad__pictures" v-if="images">
+      <img v-lazy="images[currentImage]"/>
     </div>
-    <!--<swiper class="ad__pictures" v-if="item.pictures.length" :options="swiperOptions">-->
-    <!--<swiper-slide v-for="(img, i) in item.pictures" :key="i">-->
-    <!--<img :src="img">-->
-    <!--</swiper-slide>-->
-    <!--<div class="swiper-button-prev" slot="button-prev"></div>-->
-    <!--<div class="swiper-button-next" slot="button-next"></div>-->
-    <!--<div class="swiper-scrollbar" slot="scrollbar"></div>-->
-    <!--</swiper>-->
+
+    <button class="ad__pictures-control button is-dark is-large" @click="prevImage">
+      &#8249;
+    </button>
+    <button class="ad__pictures-control ad__pictures-control--next button is-dark is-large"
+            @click="nextImage">&#8250;
+    </button>
+
     <div class="ad__overlay ad__overlay--top"/>
     <div class="ad__overlay ad__overlay--bottom"/>
 
@@ -33,15 +33,7 @@
 </template>
 
 <script>
-// import {swiper, swiperSlide} from 'vue-awesome-swiper';
-
 export default {
-  /**
-   * components: {
-   *   swiper,
-   *   swiperSlide,
-   * },
-   */
   props: {
     item: {
       type: Object,
@@ -50,31 +42,38 @@ export default {
   },
   data() {
     return {
-      swiperOptions: {
-        wrapperClass: 'swiper-wrapper',
-        loop: true,
-        lazy: true,
-        mousewheel: {
-          forceToAxis: true,
-          invert: true,
-        },
-        scrollbar: {
-          el: '.swiper-scrollbar',
-          hide: true,
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-      },
+      currentImage: 0,
     };
+  },
+  computed: {
+    images() {
+      try {
+        return JSON.parse(this.item.images);
+      } catch (e) {
+        console.log(e);
+        return [];
+      }
+    },
+  },
+  methods: {
+    prevImage() {
+      this.currentImage--;
+      if (this.currentImage < 0) {
+        this.currentImage = this.images.length - 1;
+      }
+    },
+    nextImage() {
+      this.currentImage++;
+      if (this.currentImage >= this.images.length) {
+        this.currentImage = 0;
+      }
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
   @import '../sass/variables';
-  @import "~swiper/dist/css/swiper.css";
 
   .ad {
     padding: 5px 15px;
@@ -130,6 +129,19 @@ export default {
       img {
         height: auto;
         max-height: 100%;
+      }
+
+      &-control {
+        background-color: transparentize($grey-dark, .25);
+        position: absolute;
+        top: 55%;
+        transform: translateY(-100%);
+        padding-left: 8px;
+        padding-right: 8px;
+
+        &--next {
+          right: 0;
+        }
       }
     }
 

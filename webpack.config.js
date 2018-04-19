@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: './src/app.js',
   output: {
     path: resolve(__dirname, './public'),
@@ -48,16 +49,19 @@ module.exports = {
   plugins: [
     new FriendlyErrorsWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
   ],
   devServer: {
-    host: 'localhost',
+    host: '0.0.0.0',
     port: 8080,
     hot: true,
     noInfo: true,
     overlay: true,
     historyApiFallback: true,
     contentBase: resolve('public'),
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: 1000
+    },
   },
   devtool: '#source-map',
 };

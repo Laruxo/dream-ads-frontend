@@ -19,6 +19,7 @@ module.exports = {
     // Vue
     'vue/html-self-closing': ['error', {html: {void: 'always'}}],
     'vue/max-attributes-per-line': 'off',
+    'vue/attributes-order': 'off',
     // Base
     "accessor-pairs": "off",
     "array-bracket-newline": "off",
